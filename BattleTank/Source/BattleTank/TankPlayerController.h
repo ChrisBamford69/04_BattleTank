@@ -14,11 +14,18 @@ UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
 public:
+	ATankPlayerController();
+	
 	ATank* GetControlledTank() const;
+
+protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 private:
 	ATank* ControlledTank;
+
+	void AimTowardsCrosshair();
 };

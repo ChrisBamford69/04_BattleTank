@@ -2,6 +2,11 @@
 
 #include "TankPlayerController.h"
 
+ATankPlayerController::ATankPlayerController()
+{
+	PrimaryActorTick.bCanEverTick = true;
+}
+
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -17,7 +22,25 @@ void ATankPlayerController::BeginPlay()
 	}
 }
 
+//
+// Tick this actor
+//
+void ATankPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	AimTowardsCrosshair();
+}
+
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return ControlledTank;
+}
+
+void ATankPlayerController::AimTowardsCrosshair()
+{
+	if (nullptr == ControlledTank)
+	{
+		return;
+	}
 }
