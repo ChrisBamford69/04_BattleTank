@@ -50,7 +50,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation;
 	if (true == GetSightRayHitLocation(HitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *HitLocation.ToString());
+		ControlledTank->AimAt(HitLocation);
 	}
 }
 
@@ -62,25 +62,52 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) con
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 
 	FVector2D ScreenLocation(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
-	return true;
+	FVector LookDirection;
+
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		if (GetLookVectorHitLocation(LookDirection, OutHitLocation))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-const FVector ATankPlayerController::GetBarrelStart() const
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+	FVector CameraWorldLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector& LookDirection, FVector& HitLocation) const
+{
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
+
+	// https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/Engine/UWorld/LineTraceSingleByChannel/index.html
+	if (GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		StartLocation,
+		EndLocation,
+		ECollisionChannel::ECC_Visibility))
+	{
+		HitLocation = HitResult.Location;
+		return true;
+	}
+
+	return false;
+}
+
+const FVector ATankPlayerController::GetShotEnd(FVector& LookDirection) const
 {
 	FVector BarrelLocation;
 	FRotator BarrelRotation;
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT BarrelLocation, OUT BarrelRotation);
-
-	return BarrelLocation;
-}
-
-const FVector ATankPlayerController::GetShotEnd() const
-{
-	FVector BarrelLocation;
-	FRotator BarrelRotation;
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT BarrelLocation, OUT BarrelRotation);
+	GetPlayerViewPoint(OUT BarrelLocation, OUT BarrelRotation);
 
 	/// calculate the end of of the "reach" vector
-	FVector ShotEnd = BarrelLocation + (BarrelRotation.Vector() * ShotDistance);
+	FVector ShotEnd = LookDirection + (BarrelRotation.Vector() * LineTraceRange);
 	return ShotEnd;
 }

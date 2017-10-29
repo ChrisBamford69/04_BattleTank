@@ -31,6 +31,19 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+//
+// Tick this actor
+//
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (nullptr != ControlledTank && nullptr != PlayerTank) 
+	{
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	}
+}
+
 ATank* ATankAIController::GetControlledTank() const
 {
 	return ControlledTank;
