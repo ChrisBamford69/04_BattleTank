@@ -4,8 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "Public/Tank.h"
 #include "TankAIController.generated.h"
+
+class ATank;
 
 /**
  * 
@@ -20,9 +21,6 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	ATank* ControlledTank = nullptr;
-	ATank* PlayerTank = nullptr;
-
 	ATank* GetControlledTank() const;
-	ATank* GetPlayerTank() const;
+	FVector GetPlayerTankLocation() const;
 };

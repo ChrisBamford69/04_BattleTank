@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Tank.h"
 #include "Engine/World.h"
 #include "RunTime/Engine/Public/DrawDebugHelpers.h"
 
@@ -17,10 +18,6 @@ void ATankPlayerController::BeginPlay()
 	if (nullptr == ControlledTank)
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s: no controlled tank"), *GetName());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s: controlled tank is %s"), *GetName(), *ControlledTank->GetName());
 	}
 }
 
@@ -99,15 +96,4 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector& LookDirection, FVe
 	}
 
 	return false;
-}
-
-const FVector ATankPlayerController::GetShotEnd(FVector& LookDirection) const
-{
-	FVector BarrelLocation;
-	FRotator BarrelRotation;
-	GetPlayerViewPoint(OUT BarrelLocation, OUT BarrelRotation);
-
-	/// calculate the end of of the "reach" vector
-	FVector ShotEnd = LookDirection + (BarrelRotation.Vector() * LineTraceRange);
-	return ShotEnd;
 }

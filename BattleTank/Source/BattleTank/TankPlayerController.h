@@ -3,9 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/Tank.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
+
+class ATank;
 
 /**
  * 
@@ -40,6 +41,4 @@ private:
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 	bool GetLookVectorHitLocation(FVector& LookDirection, FVector& HitLocation) const;
-
-	const FVector GetShotEnd(FVector& LookDirection) const;
 };
