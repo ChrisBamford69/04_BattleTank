@@ -19,7 +19,7 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GetControlledTank()->AimAt(GetPlayerTankLocation());
+	//GetControlledTank()->AimAt(GetPlayerTankLocation());
 }
 
 ATank* ATankAIController::GetControlledTank() const

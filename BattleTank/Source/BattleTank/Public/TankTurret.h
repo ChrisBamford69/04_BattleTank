@@ -4,28 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
-#include "TankBarrel.generated.h"
+#include "TankTurret.generated.h"
 
 /**
  * 
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
+class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
-	
+
 public:
 	// -1 is max downward speed, +1 is max upward speed
-	void Elevate(float RelativeSpeed);
-	
+	void Rotate(float RelativeSpeed);
+
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxDegreesPerSecond = 10.0f;
-
-	UPROPERTY(EditAnywhere, Category = Setup)
-	float MinElevationDegrees = 0.0f;
-
-	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxElevationDegrees = 40.0f;
-	
+	float MaxDegreesPerSecond = 25.0f;
 };
