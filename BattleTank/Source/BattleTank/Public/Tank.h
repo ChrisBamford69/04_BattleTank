@@ -10,6 +10,7 @@
 class UTankAimingComponent;
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 
 UCLASS()
@@ -45,5 +46,12 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 4000.0f; // 4000 m/s
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+	TSubclassOf<AProjectile> ProjectileToLaunch = nullptr;
 	
+	UTankBarrel * Barrel = nullptr;
+
+	float ReloadTimeInSeconds = 3.0f;
+	double LastFireTime = 0;
 };
