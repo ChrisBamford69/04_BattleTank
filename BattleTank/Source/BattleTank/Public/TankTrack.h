@@ -7,7 +7,7 @@
 #include "TankTrack.generated.h"
 
 /**
- * 
+ * TankTrack is used to set maximum driving force
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankTrack : public UStaticMeshComponent
