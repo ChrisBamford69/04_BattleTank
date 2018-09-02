@@ -7,6 +7,7 @@
 #include "Tank.generated.h"
 
 
+class UTankMovementComponent;
 class UTankAimingComponent;
 class UTankBarrel;
 class UTankTurret;
@@ -36,6 +37,9 @@ public:
 protected:
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:	
 	// Called when the game starts or when spawned
