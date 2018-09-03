@@ -31,6 +31,11 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrosshair();
 }
 
+ATank* ATankPlayerController::GetControlledTank() const
+{
+	return ControlledTank;
+}
+
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (nullptr == ControlledTank)
