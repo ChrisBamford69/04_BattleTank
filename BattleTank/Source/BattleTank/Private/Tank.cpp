@@ -17,9 +17,11 @@ ATank::ATank()
 
 void ATank::Fire()
 {
+	if (!ensure(Barrel)) { return; }
+
 	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
-	if (Barrel && IsReloaded)
+	if (IsReloaded)
 	{
 		AProjectile* NewProjectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileToLaunch,
@@ -35,11 +37,13 @@ void ATank::Fire()
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
+	// needed for Blueprint BeginPlay to work correctly
 	Super::BeginPlay();
-	TankAimingComponent = GetOwner()->GetSce
 }
 
 void ATank::AimAt(FVector HitLocation)
 {
+	if (!ensure(TankAimingComponent)) { return; }
+
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
