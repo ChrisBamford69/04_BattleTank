@@ -12,6 +12,7 @@
 UTankAimingComponent::UTankAimingComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	bWantsBeginPlay = true;
 }
 
 void UTankAimingComponent::BeginPlay()

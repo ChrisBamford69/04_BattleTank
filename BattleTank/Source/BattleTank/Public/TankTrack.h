@@ -15,11 +15,20 @@ class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UTankTrack();
+
+	virtual void BeginPlay() override;
+
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float Throttle);
 
 private:
 	// Maximum driving force in Newtons
-	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	float MaximumDrivingForce = 400000.0f;
+
+	UFUNCTION(BlueprintCallable, Category = "Phyics")
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 };
