@@ -11,6 +11,21 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCausor)
+{
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, InnerHealth);
+
+	InnerHealth -= DamageToApply;
+
+	return DamageToApply;
+}
+
+float ATank::GetHealthRemaining() const
+{
+	return (float)InnerHealth / (float)StartingHealth;
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {

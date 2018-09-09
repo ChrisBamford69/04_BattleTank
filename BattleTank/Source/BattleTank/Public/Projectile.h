@@ -31,6 +31,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float DestroyDelay = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float DamageAmount = 20.0f;
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UStaticMeshComponent* CollisionMesh = nullptr;
 
@@ -42,9 +49,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent* ExplosionForce = nullptr;
-	
-	UPROPERTY(EditDefaultsOnly, Category = "Components")
-	float DestroyDelay = 1.0f;
 
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 

@@ -4,6 +4,8 @@
 #include "Projectile.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include "Engine/World.h"
+#include "Engine/Classes/Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 
 
 // Sets default values
@@ -66,6 +68,21 @@ void AProjectile::OnHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImp
 
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
+
+	TSubclassOf<UDamageType> DamageTypeClass;
+
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		DamageAmount,
+		GetActorLocation(),
+		ExplosionForce->Radius,
+		DamageTypeClass,
+		TArray<AActor*>(),
+		this,
+		nullptr,
+		true,
+		ECollisionChannel::ECC_Visibility
+	);
 
 	FTimerHandle Handle;
 	GetWorld()->GetTimerManager().SetTimer(
