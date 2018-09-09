@@ -12,7 +12,7 @@ void UTankMovementComponent::Initialise(UTankTrack * LeftTrackToSet, UTankTrack 
 //
 // Handle the intention to move forward
 //
-void UTankMovementComponent::IntendMoveForward(float Throw)
+void UTankMovementComponent::intendMoveForward(float Throw)
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 
@@ -23,7 +23,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 //
 // Handle the intention to move forward
 //
-void UTankMovementComponent::IntendTurnRight(float Throw)
+void UTankMovementComponent::intendTurnRight(float Throw)
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 
@@ -34,12 +34,12 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
-	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+	auto AIForwardintention = MoveVelocity.GetSafeNormal();
 
-	float ForwardIntention = FVector::DotProduct(TankForward, AIForwardIntention);
-	IntendMoveForward(ForwardIntention);
+	float Forwardintention = FVector::DotProduct(TankForward, AIForwardintention);
+	intendMoveForward(Forwardintention);
 
-	float RightIntention = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
-	IntendTurnRight(RightIntention);
+	float Rightintention = FVector::CrossProduct(TankForward, AIForwardintention).Z;
+	intendTurnRight(Rightintention);
 	//UE_LOG(LogTemp, Warning, TEXT("%s: RequestDirectMove to: %s"), *GetOwner()->GetName(), *MoveVelocity.ToString());
 }

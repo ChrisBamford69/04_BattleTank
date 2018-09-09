@@ -75,7 +75,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector& LookDirection, FVe
 	auto StartLocation = PlayerCameraManager->GetCameraLocation();
 	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
 
-	// https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/Engine/UWorld/LineTraceSingleByChannel/index.html
+	// https://docs.unrealengine.com/latest/int/API/Runtime/Engine/Engine/UWorld/LineTraceSingleByChannel/index.html
 	if (GetWorld()->LineTraceSingleByChannel(
 		HitResult,
 		StartLocation,

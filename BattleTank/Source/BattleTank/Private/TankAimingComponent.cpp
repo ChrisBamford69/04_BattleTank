@@ -12,7 +12,6 @@
 UTankAimingComponent::UTankAimingComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-	bWantsBeginPlay = true;
 }
 
 void UTankAimingComponent::BeginPlay()
@@ -36,7 +35,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName(TEXT("Projectile")));
 
-	// https://docs.unrealengine.com/latest/INT/BlueprintAPI/Game/Components/ProjectileMovement/SuggestProjectileVelocity/index.html
+	// https://docs.unrealengine.com/latest/int/BlueprintAPI/Game/Components/ProjectileMovement/SuggestProjectileVelocity/index.html
 	if (true == UGameplayStatics::SuggestProjectileVelocity(
 		this,
 		OutLaunchVelocity,
@@ -122,7 +121,7 @@ EFiringState UTankAimingComponent::GetFiringState() const
 	return FiringState;
 }
 
-int UTankAimingComponent::GetRoundsLeft() const
+int32 UTankAimingComponent::GetRoundsLeft() const
 {
 	return RoundsLeft;
 }

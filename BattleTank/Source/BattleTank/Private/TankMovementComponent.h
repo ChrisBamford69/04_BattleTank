@@ -21,10 +21,10 @@ public:
 	void Initialise(UTankTrack * LeftTrackToSet, UTankTrack * RightTrackToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void IntendMoveForward(float Throw);
+	void intendMoveForward(float Throw);
 	
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void IntendTurnRight(float Throw);
+	void intendTurnRight(float Throw);
 
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
