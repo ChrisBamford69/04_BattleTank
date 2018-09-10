@@ -9,6 +9,7 @@
 
 class UTankAimingComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDeath);
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -25,6 +26,8 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetHealthRemaining() const;
 
+	FTankDeath TankDeath;
+
 protected:
 
 	UPROPERTY(BlueprintReadOnly)
@@ -34,7 +37,7 @@ protected:
 	int32 StartingHealth = 100;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int32 InnerHealth = StartingHealth;
+	int32 InnerHealth;
 
 private:	
 	// Called when the game starts or when spawned

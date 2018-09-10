@@ -17,6 +17,10 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEve
 	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, InnerHealth);
 
 	InnerHealth -= DamageToApply;
+	if (InnerHealth <= 0)
+	{
+		TankDeath.Broadcast();
+	}
 
 	return DamageToApply;
 }
@@ -31,4 +35,6 @@ void ATank::BeginPlay()
 {
 	// needed for Blueprint BeginPlay to work correctly
 	Super::BeginPlay();
+
+	InnerHealth = StartingHealth;
 }

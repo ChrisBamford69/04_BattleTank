@@ -16,9 +16,14 @@ class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION()
+	void OnTankDeath();
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void SetPawn(APawn* InPawn) override;
 
 	// how close can the AI tank get to the player
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")

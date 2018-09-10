@@ -19,9 +19,13 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 public:
 	ATankPlayerController();
 
+	UFUNCTION()
+	void OnTankDeath();
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void SetPawn(APawn* InPawn) override;
 
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5f;
