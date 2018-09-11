@@ -8,11 +8,11 @@
 UTankTrack::UTankTrack()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	bWantsBeginPlay = true;
 }
 
 void UTankTrack::BeginPlay()
 {
+	Super::BeginPlay();
 	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
 }
 
