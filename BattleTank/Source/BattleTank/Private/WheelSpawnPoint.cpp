@@ -15,20 +15,36 @@ UWheelSpawnPoint::UWheelSpawnPoint()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+ASprungWheel * UWheelSpawnPoint::GetWheel() const
+{
+	return SprungWheel;
+}
 
 // Called when the game starts
 void UWheelSpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//
+	// check for a valid type to be spawned
+	//
 	if (nullptr == WheelToSpawn) { return; }
 
-	ASprungWheel* NewSprungWheel = GetWorld()->SpawnActorDeferred<ASprungWheel>(WheelToSpawn, GetComponentTransform());
-	if (nullptr == NewSprungWheel) { return; }
+	//
+	// spawn and check for a valid new actor
+	//
+	SprungWheel = GetWorld()->SpawnActorDeferred<ASprungWheel>(WheelToSpawn, GetComponentTransform());
+	if (nullptr == SprungWheel) { return; }
 
-	NewSprungWheel->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
+	//
+	// attach the actor to the spawn point
+	//
+	SprungWheel->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
 
-	UGameplayStatics::FinishSpawningActor(NewSprungWheel, GetComponentTransform());
+	//
+	// finish the spawn
+	//
+	UGameplayStatics::FinishSpawningActor(SprungWheel, GetComponentTransform());
 }
 
 
@@ -37,4 +53,3 @@ void UWheelSpawnPoint::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
-

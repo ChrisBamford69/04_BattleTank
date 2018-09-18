@@ -19,20 +19,15 @@ public:
 
 	virtual void BeginPlay() override;
 
-	void ApplySidewaysForce();
-
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float Throttle);
 
-	void DriveTrack();
+	void DriveTrack(float CurrentThrottle);
 
 private:
 	// Maximum driving force in Newtons
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
-	float MaximumDrivingForce = 400000.0f;
+	float MaximumDrivingForce = 40000000.0f;
 
-	UFUNCTION(BlueprintCallable, Category = "Phyics")
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
-
-	float CurrentThrottle = 0.0f;
+	TArray<class ASprungWheel*> GetWheels() const;
 };

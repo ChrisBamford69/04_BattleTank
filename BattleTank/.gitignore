@@ -74,5 +74,8 @@ Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 
+# StartContent
+Content/StarterContent/*
+
 # MilitaryBase assets
 Content/MilitaryBase/*

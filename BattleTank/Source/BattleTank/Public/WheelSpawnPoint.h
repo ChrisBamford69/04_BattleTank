@@ -6,6 +6,8 @@
 #include "Components/SceneComponent.h"
 #include "WheelSpawnPoint.generated.h"
 
+class ASprungWheel;
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UWheelSpawnPoint : public USceneComponent
@@ -15,6 +17,8 @@ class BATTLETANK_API UWheelSpawnPoint : public USceneComponent
 public:	
 	// Sets default values for this component's properties
 	UWheelSpawnPoint();
+
+	ASprungWheel* GetWheel() const;
 
 protected:
 	// Called when the game starts
@@ -28,4 +32,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	TSubclassOf<AActor> WheelToSpawn = nullptr;
 	
+	// the spawned wheel
+	UPROPERTY()
+	ASprungWheel* SprungWheel = nullptr;
 };
